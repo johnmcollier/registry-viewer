@@ -18,8 +18,8 @@ interface Path {
  *    sample has header
  *
  * @param devfile - index information for devfile
- * @param devfileText - text of devfile YAML, null when sample
- * @param devfileJSON -  json representation of devfile YAML, null when sample
+ * @param devfileText - text of devfile YAML
+ * @param devfileJSON -  json representation of devfile YAML
  */
 const DevfilePage = ({
   devfile,
@@ -29,15 +29,15 @@ const DevfilePage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <div style={{ alignContent: 'center', minHeight: '100vh' }}>
     <ErrorBanner errors={errors} />
-    {devfile.type === 'stack' ? (
-      <div>
-        <DevfilePageHeader devfileMetadata={devfileJSON.metadata} devfile={devfile} />
+    <div>
+      <DevfilePageHeader devfileMetadata={devfileJSON.metadata} devfile={devfile} />
+      {devfileJSON.starterProjects != null ? (
         <DevfilePageProjects starterProjects={devfileJSON.starterProjects} />
-        <DevfilePageYAML devfileYAML={devfileYAML} />
-      </div>
-    ) : (
-      <DevfilePageHeader devfile={devfile} />
-    )}
+      ) : (
+        <></>
+      )}
+      <DevfilePageYAML devfileYAML={devfileYAML} />
+    </div>
   </div>
 );
 
